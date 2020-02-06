@@ -1,4 +1,6 @@
-﻿namespace HotelRestApi.Migrations
+﻿using HotelRestApi.DAL;
+
+namespace HotelRestApi.Migrations
 {
     using System;
     using System.Data.Entity;
@@ -14,10 +16,7 @@
 
         protected override void Seed(HotelApi.DAL.HotelContext context)
         {
-            //  This method will be called after migrating to the latest version.
-
-            //  You can use the DbSet<T>.AddOrUpdate() helper extension method
-            //  to avoid creating duplicate seed data.
+            context.Guests.AddRange(FakeData.SeedData());
         }
     }
 }
