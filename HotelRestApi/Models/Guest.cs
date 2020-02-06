@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace HotelRestApi.Models
 {
@@ -12,6 +10,7 @@ namespace HotelRestApi.Models
         {
             this.Reservations = new HashSet<Reservation>();
         }
+
         [Key]
         public int Id { get; set; }
         [Required]
@@ -24,7 +23,12 @@ namespace HotelRestApi.Models
         public DateTime? BirthDate { get; set; }
 
         public string PostalCode { get; set; }
-       
+
+        public string Telephone { get; set; }
+
+        public string Address { get; set; }
+
+        public string City { get; set; }
 
         public virtual ICollection<Reservation> Reservations { get; set; }
     }

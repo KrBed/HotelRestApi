@@ -172,6 +172,10 @@
     <Compile Include="Migrations\202002061942441_initial.designer.cs">
       <DependentUpon>202002061942441_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202002062127044_guest_properties_telephone_address_city.cs" />
+    <Compile Include="Migrations\202002062127044_guest_properties_telephone_address_city.designer.cs">
+      <DependentUpon>202002062127044_guest_properties_telephone_address_city.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Guest.cs" />
     <Compile Include="Models\Reservation.cs" />
@@ -211,6 +215,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202002061942441_initial.resx">
       <DependentUpon>202002061942441_initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202002062127044_guest_properties_telephone_address_city.resx">
+      <DependentUpon>202002062127044_guest_properties_telephone_address_city.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

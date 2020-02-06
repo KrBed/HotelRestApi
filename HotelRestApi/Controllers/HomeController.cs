@@ -12,7 +12,6 @@ namespace HotelRestApi.Controllers
         public ActionResult Index()
         {
 
-            FakeData.SeedData();
             ViewBag.Title = "Home Page";
 
             return View();
