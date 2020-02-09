@@ -1,24 +1,142 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>
-</div>
+﻿
+
+<div id="gridDiv"></div>
+<script type="text/javascript">
+    // Creation of data model
+
+    Ext.onReady(function () {
+
+        Ext.define('ReservationModel', {
+            extend: 'Ext.data.Model',
+            fields: [
+                { id: 'id', mapping: 'Id' },
+                { creationDate: 'creationDate', mapping: 'creationDate', type: 'date' },
+                { price: 'price', mapping: 'price', type: 'number' },
+                { reservationCode: 'reservationCode', mapping: 'creationCode', type: 'string' },
+            { bookInDate: 'bookInDate', mapping: 'bookInDate', type: 'date' },
+            { bookOutDate: 'bookOutDate', mapping: 'bookOutDate', type: 'date' },
+            { currency: 'currency', mapping: 'currency', type: 'string' },
+            ]
+        });
+        var store = Ext.create('Ext.data.Store', {
+            model: 'ReservationModel',
+            fields: [
+                { name: 'id', type: 'number' },
+                { name: 'reservationCode', type: 'string' },
+                { name: 'creationDate', type: 'date' },
+                { name: 'price', type: 'number' },
+                { name: 'bookInDate', type: 'date' },
+                { name: 'bookOutDate', type: 'date' },
+                { name: 'currency', type: 'string' },
+
+            ],
+            proxy: {
+                type: 'ajax',
+                url: '/api/reservations'
+            }
+        });
+
+        store.load();
+      
+        var myData = store.getData().items;
+        console.log(myData);
+
+
+        console.log(store);
+
+        // Creation of  grid
+        Ext.create('Ext.grid.Panel',
+            {
+                id: 'gridId',
+                store: store,
+                stripeRows: true,
+                title: 'Reservation Grid',
+                renderTo: 'gridDiv',
+                width: 1200,
+                collapsible: true,
+                enableColumnMove: true,
+                enableColumnResize: true,
+                groupField: 'guests',
+                columns: [
+                    {
+                        text: 'Id',
+                        width: 50,
+                        dataIndex: 'id'
+                    },
+                    {
+                        text: 'reservationCode',
+                        width: 150,
+                        flex: 1,
+                        dataIndex: 'reservationCode',
+
+
+                    },
+                    {
+                        text: 'creationDate',
+                        width: 150,
+                        flex: 1,
+                        dataIndex: 'creationDate',
+                        xtype: 'datecolumn',
+                        format: 'Y-m-d'
+
+                    }, {
+                        text: 'price',
+                        width: 100,
+                        flex: 1,
+                        dataIndex: 'price'
+                    },
+                    {
+                        text: 'bookInDate',
+                        width: 100,
+                        flex: 1,
+                        dataIndex: 'bookInDate',
+                        xtype: 'datecolumn',
+                        format: 'Y-m-d'
+                    }, {
+                        text: 'bookOutDate',
+                        width: 100,
+                        flex: 1,
+                        xtype: 'datecolumn',
+                        dataIndex: 'bookOutDate',
+                        format: 'Y-m-d'
+                    },
+                    {
+                        text: 'currency',
+                        width: 100,
+                        flex: 1,
+                        dataIndex: 'currency'
+                    },
+                    {
+                        text: 'commission',
+                        width: 100,
+                        flex: 1,
+                        dataIndex: 'commission'
+                    },
+                    {
+                        text: 'source',
+                        width: 100,
+                        flex: 1,
+                        dataIndex: 'source'
+                    },
+                    {
+                        text: 'guests',
+                        width: 200,
+
+                        dataIndex: 'guests',
+                        
+                        renderer: function(value) {
+                            var data = [];
+                            for (i = 0; i < value.length; i++) {
+                                var item = value[i];
+                                var fullName = item.firstName + ' ' + item.lastName;
+                                data.push(fullName);
+                               
+                            }
+                            return data;
+                        }
+                    },
+                ]
+            });
+    })
+
+</script>
