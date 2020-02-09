@@ -162,20 +162,19 @@ namespace HotelRestApi.DAL
 
             var random = new Random();
 
-            foreach (var guest in guests)
+            foreach (var reservation in reservations)
             {
-                var reservationNum = random.Next(1, 3);
+                var guestNum = random.Next(1, 3);
                 var indexes = new List<int>();
-
-                for (var i = 0; i <= reservationNum; i++)
+                for (var i = 0; i <= guestNum ; i++)
                 {
-                    var index = random.Next(reservations.Count);
+                    var index = random.Next(guests.Count);
                     if (!indexes.Contains(index))
                     {
                         indexes.Add(index);
-                        var reservation = reservations[index];
+                        var guest = guests[index];
                         guest.GuestReservations.Add(new ReservationGuest
-                            {GuestId = guest.Id, ReservationId = reservation.Id});
+                            { GuestId = guest.Id, ReservationId = reservation.Id });
                     }
                 }
             }

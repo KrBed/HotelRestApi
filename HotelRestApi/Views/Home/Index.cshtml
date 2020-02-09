@@ -2,7 +2,6 @@
 
 <div id="gridDiv"></div>
 <script type="text/javascript">
-    // Creation of data model
 
     Ext.onReady(function () {
 
@@ -28,7 +27,6 @@
                 { name: 'bookInDate', type: 'date' },
                 { name: 'bookOutDate', type: 'date' },
                 { name: 'currency', type: 'string' },
-
             ],
             proxy: {
                 type: 'ajax',
@@ -37,12 +35,6 @@
         });
 
         store.load();
-      
-        var myData = store.getData().items;
-        console.log(myData);
-
-
-        console.log(store);
 
         // Creation of  grid
         Ext.create('Ext.grid.Panel',
@@ -50,7 +42,7 @@
                 id: 'gridId',
                 store: store,
                 stripeRows: true,
-                title: 'Reservation Grid',
+                title: 'Rezerwacje',
                 renderTo: 'gridDiv',
                 width: 1200,
                 collapsible: true,
@@ -64,7 +56,7 @@
                         dataIndex: 'id'
                     },
                     {
-                        text: 'reservationCode',
+                        text: 'Kod rezerwacji',
                         width: 150,
                         flex: 1,
                         dataIndex: 'reservationCode',
@@ -72,66 +64,57 @@
 
                     },
                     {
-                        text: 'creationDate',
-                        width: 150,
+                        text: 'Data utworzenia',
                         flex: 1,
                         dataIndex: 'creationDate',
                         xtype: 'datecolumn',
                         format: 'Y-m-d'
 
                     }, {
-                        text: 'price',
-                        width: 100,
+                        text: 'Cena',
                         flex: 1,
                         dataIndex: 'price'
                     },
                     {
-                        text: 'bookInDate',
-                        width: 100,
+                        text: 'Data zameldowania',
                         flex: 1,
                         dataIndex: 'bookInDate',
                         xtype: 'datecolumn',
                         format: 'Y-m-d'
                     }, {
-                        text: 'bookOutDate',
-                        width: 100,
+                        text: 'Data wymeldowania',
                         flex: 1,
                         xtype: 'datecolumn',
                         dataIndex: 'bookOutDate',
                         format: 'Y-m-d'
                     },
                     {
-                        text: 'currency',
-                        width: 100,
+                        text: 'Waluta',
                         flex: 1,
                         dataIndex: 'currency'
                     },
                     {
-                        text: 'commission',
-                        width: 100,
+                        text: 'Prowizja',
                         flex: 1,
                         dataIndex: 'commission'
                     },
                     {
-                        text: 'source',
-                        width: 100,
+                        text: 'Źródło',
                         flex: 1,
                         dataIndex: 'source'
                     },
                     {
-                        text: 'guests',
+                        text: 'Goście',
                         width: 200,
-
                         dataIndex: 'guests',
-                        
-                        renderer: function(value) {
-                            var data = [];
+                        renderer: function (value) {
+                            var data = "<select style='width: 180px'>";
                             for (i = 0; i < value.length; i++) {
                                 var item = value[i];
                                 var fullName = item.firstName + ' ' + item.lastName;
-                                data.push(fullName);
-                               
+                                data += "<option>" + fullName + "</option>";
                             }
+                            data += "</select>";
                             return data;
                         }
                     },
