@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HotelRestApi.Models
 {
@@ -8,7 +9,7 @@ namespace HotelRestApi.Models
     {
         public Guest()
         {
-            this.Reservations = new HashSet<Reservation>();
+            this.GuestReservations = new HashSet<ReservationGuest>();
         }
 
         [Key]
@@ -30,6 +31,6 @@ namespace HotelRestApi.Models
 
         public string City { get; set; }
 
-        public virtual ICollection<Reservation> Reservations { get; set; }
+        public ICollection<ReservationGuest> GuestReservations { get; set; }
     }
 }

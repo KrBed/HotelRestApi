@@ -16,7 +16,7 @@ namespace HotelRestApi.Migrations
 
         protected override void Seed(HotelApi.DAL.HotelContext context)
         {
-            context.Guests.AddRange(FakeData.SeedData());
+            FakeData.SeedData(context);
         }
     }
 }

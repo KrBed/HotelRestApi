@@ -12,9 +12,12 @@ namespace HotelApi.DAL
         public HotelContext() : base("name=DefaultConnection")
         {
             Database.SetInitializer<HotelContext>(new DropCreateDatabaseIfModelChanges<HotelContext>());
+            this.Configuration.LazyLoadingEnabled = false;
         }
 
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<Guest> Guests { get; set; }
+        public DbSet <ReservationGuest> ReservationsGuests { get; set; }
+
     }
 }
