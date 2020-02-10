@@ -2,6 +2,7 @@
 <div id="gridDiv"></div>
 
 <script type="text/javascript">
+   
 
     Ext.onReady(function () {
 
@@ -12,9 +13,9 @@
                 { creationDate: 'creationDate', mapping: 'creationDate', type: 'date' },
                 { price: 'price', mapping: 'price', type: 'number' },
                 { reservationCode: 'reservationCode', mapping: 'creationCode', type: 'string' },
-            { bookInDate: 'bookInDate', mapping: 'bookInDate', type: 'date' },
-            { bookOutDate: 'bookOutDate', mapping: 'bookOutDate', type: 'date' },
-            { currency: 'currency', mapping: 'currency', type: 'string' },
+                { bookInDate: 'bookInDate', mapping: 'bookInDate', type: 'date' },
+                { bookOutDate: 'bookOutDate', mapping: 'bookOutDate', type: 'date' },
+                { currency: 'currency', mapping: 'currency', type: 'string' },
             ]
         });
 
@@ -38,14 +39,14 @@
         store.load();
 
         // Creation of  grid
-        Ext.create('Ext.grid.Panel',
+        var gridPanel = Ext.create('Ext.grid.Panel',
             {
                 id: 'gridId',
                 store: store,
                 stripeRows: true,
                 title: 'Rezerwacje',
                 renderTo: 'gridDiv',
-                width: 1200,
+                flex:1,
                 collapsible: true,
                 enableColumnMove: true,
                 enableColumnResize: true,
@@ -60,8 +61,6 @@
                         width: 150,
                         flex: 1,
                         dataIndex: 'reservationCode',
-
-
                     },
                     {
                         text: 'Data utworzenia',
