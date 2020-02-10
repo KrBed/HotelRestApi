@@ -12,6 +12,7 @@ namespace HotelRestApi.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
+            AutomaticMigrationDataLossAllowed = false;
         }
 
         protected override void Seed(HotelApi.DAL.HotelContext context)

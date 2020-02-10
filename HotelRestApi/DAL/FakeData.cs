@@ -34,7 +34,7 @@ namespace HotelRestApi.DAL
                 },
                 new Guest
                 {
-                    FirstName = "Patryk", LastName = "Wiśniewski", Email = "wisniewski@gmail.com",
+                    FirstName = "Patryk", LastName = "Wiśniewski", Email = "wisniewski1@gmail.com",
                     PostalCode = "22-789", BirthDate = new DateTime(1995, 10, 11), City = "Warszawa",
                     Address = "Olszrtńska 34", Telephone = "223456789"
                 },
@@ -57,7 +57,7 @@ namespace HotelRestApi.DAL
                 },
                 new Guest
                 {
-                    FirstName = "Tomek", LastName = "Wiśniewski", Email = "wisniewski@gmail.com", PostalCode = "10-700",
+                    FirstName = "Tomek", LastName = "Wiśniewski", Email = "wisniewski2@gmail.com", PostalCode = "10-700",
                     BirthDate = new DateTime(1985, 10, 9)
                 },
                 new Guest
@@ -79,13 +79,14 @@ namespace HotelRestApi.DAL
 
 
             if (!context.Guests.Any()) context.Guests.AddRange(guests);
+            context.SaveChanges();
 
             reservations.AddRange(new List<Reservation>
                 {
                     new Reservation
                     {
                         BookInDate = new DateTime(2020, 2, 24), BookOutDate = new DateTime(2020, 2, 26),
-                        CreationDate = DateTime.Now, Currency = "PLN", Price = 160, ReservationCode = "9876543210",
+                        CreationDate = DateTime.Now, Currency = "PLN", Price = 160, ReservationCode = "9876545554",
                         Source = "Gotówka", Commission = 21
                     },
                     new Reservation

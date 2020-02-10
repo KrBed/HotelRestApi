@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Linq.Expressions;
 using HotelApi.DAL;
 using HotelRestApi.Models;
+using Microsoft.Ajax.Utilities;
+using Expression = System.Linq.Expressions.Expression;
 
 namespace HotelRestApi.Repositories
 {
@@ -20,10 +24,15 @@ namespace HotelRestApi.Repositories
             return _context.Reservations.ToList();
         }
 
-        public ICollection<Reservation> GetAllWithGuests()
+        public IEnumerable<Reservation> GetAllWithGuests()
         {
-            
-            return _context.Reservations.Include(r => r.ReservationsGuests.Select(rg=>rg.Guest)).ToList();
+
+            return _context.Reservations.Include(r => r.ReservationsGuests.Select(rg => rg.Guest)).ToList();
+        }
+
+        public Reservation FindReservation(Expression<Func<Reservation,bool>> filter)
+        {
+            return _context.Reservations.FirstOrDefault(filter);
         }
 
         public void Insert(Reservation reservation)
@@ -63,7 +72,7 @@ namespace HotelRestApi.Repositories
         }
 
         public void Save()
-        {
+        {   
             _context.SaveChanges();
         }
 

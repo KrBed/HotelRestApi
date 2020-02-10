@@ -19,6 +19,8 @@ namespace HotelRestApi.Models
         [Required]
         public string LastName { get; set; }
         [Required]
+        [StringLength(450)]
+        [Index(IsUnique = true)]
         public string Email { get; set; }
 
         public DateTime? BirthDate { get; set; }
@@ -31,6 +33,6 @@ namespace HotelRestApi.Models
 
         public string City { get; set; }
 
-        public ICollection<ReservationGuest> GuestReservations { get; set; }
+        public virtual ICollection<ReservationGuest> GuestReservations { get; set; }
     }
 }

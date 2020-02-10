@@ -18,6 +18,8 @@ namespace HotelRestApi.Models
 
         [Required]
         [MaxLength(10)]
+        [StringLength(10)]
+        [Index(IsUnique = true)]
         public string ReservationCode { get; set; }
 
         [Required]

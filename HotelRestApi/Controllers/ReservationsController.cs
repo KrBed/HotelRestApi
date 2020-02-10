@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -32,6 +33,11 @@ namespace HotelRestApi.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest("Invalid data");
+            }
+
+            if (_reservationRepo.FindReservation(x => x.ReservationCode == reservationDto.ReservationCode) != null)
+            {
+                return BadRequest(String.Format("Reservation with code:{0}, already exists",reservationDto.ReservationCode));
             }
 
             var reservation = ReservationDto.CreateReservation(reservationDto);

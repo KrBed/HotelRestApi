@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using HotelRestApi.Models;
 
@@ -32,7 +33,6 @@ namespace HotelRestApi.DTO
         public string City { get; set; }
 
         public List<ReservationGuest> Reservations { get; set; }
-
 
         public static GuestDto CreateGuestDto(Guest guest, bool addReservations = false)
         {
