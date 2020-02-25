@@ -1,0 +1,123 @@
+﻿
+<div id="gridDiv"></div>
+
+<script type="text/javascript">
+   
+
+    Ext.onReady(function () {
+
+        Ext.define('ReservationModel', {
+            extend: 'Ext.data.Model',
+            fields: [
+                { id: 'id', mapping: 'Id' },
+                { creationDate: 'creationDate', mapping: 'creationDate', type: 'date' },
+                { price: 'price', mapping: 'price', type: 'number' },
+                { reservationCode: 'reservationCode', mapping: 'creationCode', type: 'string' },
+                { bookInDate: 'bookInDate', mapping: 'bookInDate', type: 'date' },
+                { bookOutDate: 'bookOutDate', mapping: 'bookOutDate', type: 'date' },
+                { currency: 'currency', mapping: 'currency', type: 'string' },
+            ]
+        });
+
+        var store = Ext.create('Ext.data.Store', {
+            model: 'ReservationModel',
+            fields: [
+                { name: 'id', type: 'number' },
+                { name: 'reservationCode', type: 'string' },
+                { name: 'creationDate', type: 'date' },
+                { name: 'price', type: 'number' },
+                { name: 'bookInDate', type: 'date' },
+                { name: 'bookOutDate', type: 'date' },
+                { name: 'currency', type: 'string' },
+            ],
+            proxy: {
+                type: 'ajax',
+                url: '/api/reservations'
+            }
+        });
+
+        store.load();
+
+        // Creation of  grid
+        var gridPanel = Ext.create('Ext.grid.Panel',
+            {
+                id: 'gridId',
+                store: store,
+                stripeRows: true,
+                title: 'Rezerwacje',
+                renderTo: 'gridDiv',
+                flex:1,
+                collapsible: true,
+                enableColumnMove: true,
+                enableColumnResize: true,
+                columns: [
+                    {
+                        text: 'Id',
+                        width: 50,
+                        dataIndex: 'id'
+                    },
+                    {
+                        text: 'Kod rezerwacji',
+                        width: 150,
+                        flex: 1,
+                        dataIndex: 'reservationCode',
+                    },
+                    {
+                        text: 'Data utworzenia',
+                        flex: 1,
+                        dataIndex: 'creationDate',
+                        xtype: 'datecolumn',
+                        format: 'Y-m-d'
+
+                    }, {
+                        text: 'Cena',
+                        flex: 1,
+                        dataIndex: 'price'
+                    },
+                    {
+                        text: 'Data zameldowania',
+                        flex: 1,
+                        dataIndex: 'bookInDate',
+                        xtype: 'datecolumn',
+                        format: 'Y-m-d'
+                    }, {
+                        text: 'Data wymeldowania',
+                        flex: 1,
+                        xtype: 'datecolumn',
+                        dataIndex: 'bookOutDate',
+                        format: 'Y-m-d'
+                    },
+                    {
+                        text: 'Waluta',
+                        flex: 1,
+                        dataIndex: 'currency'
+                    },
+                    {
+                        text: 'Prowizja',
+                        flex: 1,
+                        dataIndex: 'commission'
+                    },
+                    {
+                        text: 'Źródło',
+                        flex: 1,
+                        dataIndex: 'source'
+                    },
+                    {
+                        text: 'Goście',
+                        width: 200,
+                        dataIndex: 'guests',
+                        renderer: function (value) {
+                            var data = "<select style='width: 180px'>";
+                            for (i = 0; i < value.length; i++) {
+                                var item = value[i];
+                                var fullName = item.firstName + ' ' + item.lastName;
+                                data += "<option>" + fullName + "</option>";
+                            }
+                            data += "</select>";
+                            return data;
+                        }
+                    },
+                ]
+            });
+    })
+</script>
